@@ -11,7 +11,7 @@ class XueqiuSpider(scrapy.Spider):
     name = 'xueqiu'
     allowed_domains = ['xueqiu.com']
     start_urls = []
-    with open('D:\\Users\\MyProject\\DataAnalysis\\stock\\crawlStockWebsite\\crawlwebsite\\stock_stock_base.csv', 'r') as f:
+    with open('/root/crawlStockWebsite/crawlwebsite/stock_stock_base.csv', 'r') as f:
         reader = csv.reader(f)
         for row in reader:
             code = row[0]
@@ -35,7 +35,7 @@ class XueqiuSpider(scrapy.Spider):
         name = response.css('#stockName::text').extract()
         if name:
             # print('name:{}'.format(name[0]))
-        item['stock_name'] = name[0]
+            item['stock_name'] = name[0]
     
     def get_website(self, response, item):
         website = response.css('a[target="_blank"]::text').extract()
