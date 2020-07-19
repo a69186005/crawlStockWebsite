@@ -9,7 +9,7 @@ from scrapy.exporters import CsvItemExporter
 
 class CrawlwebsitePipeline(object):
     def open_spider(self, spider):
-        self.file = open('websites.csv', 'wb')
+        self.file = open('website_data.csv', 'wb')
         self.exporter = CsvItemExporter(self.file, encoding='gb2312')
         self.exporter.start_exporting()
 

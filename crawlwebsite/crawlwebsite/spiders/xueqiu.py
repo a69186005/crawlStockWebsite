@@ -34,20 +34,24 @@ class XueqiuSpider(scrapy.Spider):
     def get_name(self, response, item):
         name = response.css('#stockName::text').extract()
         if name:
-            print('name:{}'.format(name[0]))
+            # print('name:{}'.format(name[0]))
         item['stock_name'] = name[0]
     
     def get_website(self, response, item):
         website = response.css('a[target="_blank"]::text').extract()
-        print('website:{}'.format(website[-8]))
+        # print('website:{}'.format(website[-8]))
         item['stock_website'] = website[-8]
+    
+    def get_id(self, response, item):
+        stock_id = response.css('#stockName span::text').extract()[0].replace('(', '').replace(')', '')
+        # print('stock_id:{}'.format(stock_id))
+        item['stock_id'] = stock_id
 
     def get_nature(self, response, item):
         nature = response.xpath('//td[contains(text(), "组织形式：")]/following-sibling::td/text()').extract()
-        print('nature:{}'.format(nature[0]))
-        item['company_nature'] = nature[0]
+        if nature:
+            # print('nature:{}'.format(nature[0]))
+            item['company_nature'] = nature[0]
+        else:
+            item['company_nature'] = '未知'
 
-    def get_id(self, response, item):
-        stock_id = response.css('#stockName span::text').extract()[0].replace('(', '').replace(')', '')
-        print('stock_id:{}'.format(stock_id))
-        item['stock_id'] = stock_id
