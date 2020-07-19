@@ -11,7 +11,7 @@ class XueqiuSpider(scrapy.Spider):
     name = 'xueqiu'
     allowed_domains = ['xueqiu.com']
     start_urls = []
-    with open('/root/crawlStockWebsite/crawlwebsite/stock_stock_base.csv', 'r') as f:
+    with open('/root/crawlStockWebsite/crawlwebsite/stock_stock_base.csv', 'rb') as f:
         reader = csv.reader(f)
         for row in reader:
             code = row[0]
